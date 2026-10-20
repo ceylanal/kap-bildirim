@@ -1,0 +1,284 @@
+{
+  "rules_revision": "f281f9c959e8054a",
+  "sample_size": 8,
+  "input_mode": "provided_fields",
+  "not_a_representative_population_estimate": true,
+  "metrics_by_dataset": {
+    "historical": {
+      "critical": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 0,
+        "tn": 4,
+        "false_positive_rate": 0.0,
+        "false_alarm_share": 0.0,
+        "critical_miss_rate": 0.0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "flash": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 0,
+        "tn": 4,
+        "false_positive_rate": 0.0,
+        "false_alarm_share": 0.0,
+        "critical_miss_rate": 0.0,
+        "precision": 1.0,
+        "recall": 1.0
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "kap-1407826",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1407826",
+      "expected": {
+        "critical": true,
+        "flash": true
+      },
+      "actual_critical": true,
+      "actual_flash": true,
+      "manual_review": true,
+      "assessments": [
+        {
+          "event": "concordat",
+          "label": "Konkordato ve muhlet",
+          "priority": "P0",
+          "status": "approved",
+          "affected_entity_role": "unknown",
+          "source_field": "body",
+          "source_sentence": "alacaklılar tarafından başlatılacak haciz işlemlerinin önüne geçmek, , üretim faaliyetlerimizin devamını sağlamak, Şirket öz varlıklarını korumak ve borsada işlem yapan küçük yatırımcılarımızın herhangi bir hak kaybına maruz kalmamaları için konkordato talepli başvurumuza, Bakırköy 1. Asliye Ticaret Mahkemesi 2025/255 sayılı dosya ile 18.03.2025 tarihinde bu tarihten itibaren üç ay geçici mühlet verilmiş, geçici Konkordato komiserleri görevlendirilmiş ve tedbir kararlarına hükmedilmiştir",
+          "action": "flash",
+          "manual_review": true,
+          "reason": "p0_without_llm",
+          "rules_revision": "f281f9c959e8054a",
+          "materiality": {}
+        }
+      ]
+    },
+    {
+      "case_id": "kap-1449773",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1449773",
+      "expected": {
+        "critical": true,
+        "flash": true
+      },
+      "actual_critical": true,
+      "actual_flash": true,
+      "manual_review": false,
+      "assessments": [
+        {
+          "event": "concordat",
+          "label": "Konkordato ve muhlet",
+          "priority": "P0",
+          "status": "extended",
+          "affected_entity_role": "issuer",
+          "source_field": "body",
+          "source_sentence": "Bakırköy 1. Asliye Ticaret Mahkemesinin 2025/255 Esas Sayılı Konkordato dosyası kapsamında bugün (18.06.2025) yapılan duruşmasında, 18.06.2025 tarihinden başlamak üzere Şirketimize ''1 YILLIK KESİN MÜHLET VERİLMESİNE'' , İlgili Mahkemece borçluların veya komiserlerin yapacağı talep üzerine kesin mühletin en fazla altı ay süre ile uzatılabileceği ve kesin mühletin kabulüne ilişkin karara karşı İİK'nun 293/1. nci maddesi uyarınca kanun yolunun kapalı olduğu , Konkordatonun başarıya ulaşmasının mümkün olup olmadığının yakından incelenmesi amacıyla alacaklı sayısı ve alacak miktarı dikkate alınarak yeni bir görevlendirme yapılmasını gerektiren bir durum olmadığı anlaşıldığından geçici komiser heyetinin görevlerine DEVAM ETMESİNE",
+          "action": "flash",
+          "manual_review": false,
+          "reason": "p0_without_llm",
+          "rules_revision": "f281f9c959e8054a",
+          "materiality": {}
+        }
+      ]
+    },
+    {
+      "case_id": "kap-1639752",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1639752",
+      "expected": {
+        "critical": true,
+        "flash": true
+      },
+      "actual_critical": true,
+      "actual_flash": true,
+      "manual_review": false,
+      "assessments": [
+        {
+          "event": "concordat",
+          "label": "Konkordato ve muhlet",
+          "priority": "P0",
+          "status": "application",
+          "affected_entity_role": "issuer",
+          "source_field": "body",
+          "source_sentence": "mevcut borçların makul vadelere yayılarak yeniden yapılandırılması ve Şirketimiz ile pay sahipleri, yatırımcılar, çalışanlar ve alacaklıların menfaatlerinin korunması amacıyla İcra ve İflas Kanunu'nun 285 ve devamı maddeleri kapsamında konkordato talebinde bulunulmuştur",
+          "action": "flash",
+          "manual_review": false,
+          "reason": "p0_without_llm",
+          "rules_revision": "f281f9c959e8054a",
+          "materiality": {}
+        }
+      ]
+    },
+    {
+      "case_id": "kap-1568947",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1568947",
+      "expected": {
+        "critical": true,
+        "flash": true
+      },
+      "actual_critical": true,
+      "actual_flash": true,
+      "manual_review": true,
+      "assessments": [
+        {
+          "event": "concordat",
+          "label": "Konkordato ve muhlet",
+          "priority": "P0",
+          "status": "application",
+          "affected_entity_role": "issuer",
+          "source_field": "body",
+          "source_sentence": "Ancak Şirketimiz aleyhine konut alacaklıları tarafından açılan iflas istemli davalar ve oluşan finansal baskılar nedeniyle mali yapının korunabilmesi amacıyla konkordato başvurusunda bulunulması zorunlu hale gelmiştir",
+          "action": "flash",
+          "manual_review": false,
+          "reason": "p0_without_llm",
+          "rules_revision": "f281f9c959e8054a",
+          "materiality": {}
+        },
+        {
+          "event": "insolvency_bankruptcy",
+          "label": "Iflas ve borca batiklik",
+          "priority": "P0",
+          "status": "approved",
+          "affected_entity_role": "issuer",
+          "source_field": "body",
+          "source_sentence": "Bakırköy 1. Asliye Ticaret Mahkemesi'nin 2024/350 E sayılı dosyası kapsamında 05.03.2026 tarihinde konut alacaklılarının açtığı iflas istemli davalar nedeniyle Şirketimiz hakkında iflas kararı verilmiştir",
+          "action": "flash",
+          "manual_review": false,
+          "reason": "p0_without_llm",
+          "rules_revision": "f281f9c959e8054a",
+          "materiality": {}
+        },
+        {
+          "event": "merger_acquisition",
+          "label": "Birlesme, devralma, varlik satisi",
+          "priority": "P2",
+          "status": "approved",
+          "affected_entity_role": "unknown",
+          "source_field": "body",
+          "source_sentence": "ile tüm aktif ve pasiflerin devralınması suretiyle birleşmesine karar verilmiş, söz konusu birleşme 31.12.2010 tarihinde tescil edilmiş ve 06.01.2011 tarihli 7724 sayılı Türkiye Ticaret Sicil Gazetesi'nde yayımlanmıştır",
+          "action": "digest",
+          "manual_review": true,
+          "reason": "keyword_context_review",
+          "rules_revision": "f281f9c959e8054a",
+          "materiality": {}
+        },
+        {
+          "event": "paid_capital_increase",
+          "label": "Bedelli sermaye artirimi",
+          "priority": "P2",
+          "status": "decision",
+          "affected_entity_role": "unknown",
+          "source_field": "body",
+          "source_sentence": "• 23.08.2023 tarihinde 470.231.412 TL tutarında nakit girişinin sağlanmasını amaçlayan bedelli sermaye artırımı kararı alınmıştır",
+          "action": "digest",
+          "manual_review": true,
+          "reason": "keyword_context_review",
+          "rules_revision": "f281f9c959e8054a",
+          "materiality": {}
+        },
+        {
+          "event": "bonus_capital_increase",
+          "label": "Bedelsiz sermaye artirimi",
+          "priority": "P2",
+          "status": "application",
+          "affected_entity_role": "issuer",
+          "source_field": "body",
+          "source_sentence": "• Şirketimiz asıl ihtiyacı olan bedelli sermaye artışını gerçekleştirmek amacı ile hareket etmeye devam ederken, öncesinde özkaynak yapısını güçlendirmek amacıyla 28.08.2024 tarihinde bedelsiz sermaye artırımı başvurusu yapmıştır",
+          "action": "digest",
+          "manual_review": false,
+          "reason": "keyword_context_review",
+          "rules_revision": "f281f9c959e8054a",
+          "materiality": {}
+        }
+      ]
+    },
+    {
+      "case_id": "kap-1639931",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1639931",
+      "expected": {
+        "critical": false,
+        "flash": false
+      },
+      "actual_critical": false,
+      "actual_flash": false,
+      "manual_review": true,
+      "assessments": [
+        {
+          "event": "material_operations_halt",
+          "label": "Onemli ve plansiz faaliyet durmasi",
+          "priority": "P2",
+          "status": "unknown",
+          "affected_entity_role": "unknown",
+          "source_field": "body",
+          "source_sentence": "Üretime geçici süreyle ara verilmesinin toplam üretime önemli bir etkisinin olması beklenmemektedir",
+          "action": "digest",
+          "manual_review": true,
+          "reason": "planned_maintenance",
+          "rules_revision": "f281f9c959e8054a",
+          "materiality": {}
+        }
+      ]
+    },
+    {
+      "case_id": "kap-1635877",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1635877",
+      "expected": {
+        "critical": false,
+        "flash": false
+      },
+      "actual_critical": false,
+      "actual_flash": false,
+      "manual_review": true,
+      "assessments": [
+        {
+          "event": "material_operations_halt",
+          "label": "Onemli ve plansiz faaliyet durmasi",
+          "priority": "P2",
+          "status": "unknown",
+          "affected_entity_role": "issuer",
+          "source_field": "body",
+          "source_sentence": "oda_AdditionalExplanationTextBlock| Şirketimiz Ankara ve Erenler fabrikalarında, yıllık planlı bakım/onarım çalışmaları nedeni ile 3 Ağustos – 15 Ağustos tarihleri arasında 12 işgünü üretime ara verilecektir",
+          "action": "digest",
+          "manual_review": true,
+          "reason": "planned_maintenance",
+          "rules_revision": "f281f9c959e8054a",
+          "materiality": {}
+        }
+      ]
+    },
+    {
+      "case_id": "kap-1438970",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1438970",
+      "expected": {
+        "critical": false,
+        "flash": false
+      },
+      "actual_critical": false,
+      "actual_flash": false,
+      "manual_review": false,
+      "assessments": []
+    },
+    {
+      "case_id": "kap-1442035",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1442035",
+      "expected": {
+        "critical": false,
+        "flash": false
+      },
+      "actual_critical": false,
+      "actual_flash": false,
+      "manual_review": false,
+      "assessments": []
+    }
+  ]
+}

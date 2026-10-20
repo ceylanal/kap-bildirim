@@ -1,0 +1,39 @@
+[Unit]
+Description=KAP bildirim pilotu
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=kap-bildirim
+Group=kap-bildirim
+WorkingDirectory=/opt/kap-bildirim
+EnvironmentFile=/etc/kap-bildirim.env
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/usr/bin/python3 -m kapwatch run
+Restart=on-failure
+RestartSec=30
+TimeoutStopSec=90
+StateDirectory=kap-bildirim
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+CapabilityBoundingSet=
+LockPersonality=true
+MemoryMax=256M
+TasksMax=24
+CPUQuota=20%
+
+[Install]
+WantedBy=multi-user.target

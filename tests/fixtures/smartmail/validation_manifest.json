@@ -1,0 +1,9 @@
+[
+  {"index":1671600,"expected":{"critical":true,"flash":true},"label_basis":"KAP resmî denetim görüşü: görüş bildirmekten kaçınma. Önceki geliştirme kümesinde olmayan şirket/dönem; P0."},
+  {"index":1591113,"expected":{"critical":true,"flash":true},"label_basis":"KAP resmî denetim görüşü: görüş bildirmekten kaçınma; P0."},
+  {"index":1643006,"expected":{"critical":false,"flash":false},"label_basis":"Yıllık planlı bakım çalışmaları ve ilan edilmiş dönüş tarihi; kriz P0 değil."},
+  {"index":1622445,"expected":{"critical":false,"flash":false},"label_basis":"Makine bakımı ve temizliği için planlı duruş; kriz P0 değil."},
+  {"index":1637957,"expected":{"critical":false,"flash":false},"label_basis":"Planlı izin ve bakım nedeniyle geçici üretim arası; kriz P0 değil."},
+  {"index":1616896,"expected":{"critical":false,"flash":false},"label_basis":"Planlı klinker fırını revizyonu; stok nedeniyle satış etkisi beklenmiyor, kriz P0 değil."},
+  {"index":1530788,"expected":{"critical":false,"flash":false},"label_basis":"Yıl sonu envanter sayımı ve planlı bakım; kriz P0 değil."}
+]

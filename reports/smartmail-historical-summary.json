@@ -1,0 +1,153 @@
+{
+  "rules_revision": "f281f9c959e8054a",
+  "sample_size": 8,
+  "input_mode": "title_summary_only",
+  "not_a_representative_population_estimate": true,
+  "metrics_by_dataset": {
+    "historical": {
+      "critical": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 3,
+        "tn": 4,
+        "false_positive_rate": 0.0,
+        "false_alarm_share": 0.0,
+        "critical_miss_rate": 0.75,
+        "precision": 1.0,
+        "recall": 0.25
+      },
+      "flash": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 3,
+        "tn": 4,
+        "false_positive_rate": 0.0,
+        "false_alarm_share": 0.0,
+        "critical_miss_rate": 0.75,
+        "precision": 1.0,
+        "recall": 0.25
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "kap-1407826",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1407826",
+      "expected": {
+        "critical": true,
+        "flash": true
+      },
+      "actual_critical": false,
+      "actual_flash": false,
+      "manual_review": false,
+      "assessments": []
+    },
+    {
+      "case_id": "kap-1449773",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1449773",
+      "expected": {
+        "critical": true,
+        "flash": true
+      },
+      "actual_critical": false,
+      "actual_flash": false,
+      "manual_review": false,
+      "assessments": []
+    },
+    {
+      "case_id": "kap-1639752",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1639752",
+      "expected": {
+        "critical": true,
+        "flash": true
+      },
+      "actual_critical": true,
+      "actual_flash": true,
+      "manual_review": true,
+      "assessments": [
+        {
+          "event": "concordat",
+          "label": "Konkordato ve muhlet",
+          "priority": "P0",
+          "status": "decision",
+          "affected_entity_role": "unknown",
+          "source_field": "summary",
+          "source_sentence": "Konkordato Talebi ve Geçici Mühlet Kararı Hakkında",
+          "action": "flash",
+          "manual_review": true,
+          "reason": "p0_without_llm",
+          "rules_revision": "f281f9c959e8054a",
+          "materiality": {}
+        }
+      ]
+    },
+    {
+      "case_id": "kap-1568947",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1568947",
+      "expected": {
+        "critical": true,
+        "flash": true
+      },
+      "actual_critical": false,
+      "actual_flash": false,
+      "manual_review": false,
+      "assessments": []
+    },
+    {
+      "case_id": "kap-1639931",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1639931",
+      "expected": {
+        "critical": false,
+        "flash": false
+      },
+      "actual_critical": false,
+      "actual_flash": false,
+      "manual_review": false,
+      "assessments": []
+    },
+    {
+      "case_id": "kap-1635877",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1635877",
+      "expected": {
+        "critical": false,
+        "flash": false
+      },
+      "actual_critical": false,
+      "actual_flash": false,
+      "manual_review": false,
+      "assessments": []
+    },
+    {
+      "case_id": "kap-1438970",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1438970",
+      "expected": {
+        "critical": false,
+        "flash": false
+      },
+      "actual_critical": false,
+      "actual_flash": false,
+      "manual_review": false,
+      "assessments": []
+    },
+    {
+      "case_id": "kap-1442035",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1442035",
+      "expected": {
+        "critical": false,
+        "flash": false
+      },
+      "actual_critical": false,
+      "actual_flash": false,
+      "manual_review": false,
+      "assessments": []
+    }
+  ]
+}

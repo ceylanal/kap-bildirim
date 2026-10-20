@@ -1,0 +1,15 @@
+[Unit]
+Description=KAP pilot health check
+
+[Service]
+Type=oneshot
+User=kap-bildirim
+Group=kap-bildirim
+WorkingDirectory=/opt/kap-bildirim
+EnvironmentFile=/etc/kap-bildirim.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/usr/bin/python3 -m kapwatch health
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/kap-bildirim

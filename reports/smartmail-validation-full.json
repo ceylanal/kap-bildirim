@@ -1,0 +1,215 @@
+{
+  "rules_revision": "f281f9c959e8054a",
+  "sample_size": 7,
+  "input_mode": "provided_fields",
+  "not_a_representative_population_estimate": true,
+  "metrics_by_dataset": {
+    "historical": {
+      "critical": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 5,
+        "false_positive_rate": 0.0,
+        "false_alarm_share": 0.0,
+        "critical_miss_rate": 0.0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "flash": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 5,
+        "false_positive_rate": 0.0,
+        "false_alarm_share": 0.0,
+        "critical_miss_rate": 0.0,
+        "precision": 1.0,
+        "recall": 1.0
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "kap-1671600",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1671600",
+      "expected": {
+        "critical": true,
+        "flash": true
+      },
+      "actual_critical": true,
+      "actual_flash": true,
+      "manual_review": false,
+      "assessments": [
+        {
+          "event": "audit_adverse_disclaimer",
+          "label": "Denetcinin olumsuz gorusu veya gorus vermekten kacinmasi",
+          "priority": "P0",
+          "status": "decision",
+          "affected_entity_role": "issuer",
+          "source_field": "structured_fields:opinionType",
+          "source_sentence": "KAP denetim görüşü alanı (opinionType): AC",
+          "action": "flash",
+          "manual_review": false,
+          "reason": "official_audit_opinion_without_llm",
+          "rules_revision": "f281f9c959e8054a",
+          "materiality": {}
+        }
+      ]
+    },
+    {
+      "case_id": "kap-1591113",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1591113",
+      "expected": {
+        "critical": true,
+        "flash": true
+      },
+      "actual_critical": true,
+      "actual_flash": true,
+      "manual_review": false,
+      "assessments": [
+        {
+          "event": "audit_adverse_disclaimer",
+          "label": "Denetcinin olumsuz gorusu veya gorus vermekten kacinmasi",
+          "priority": "P0",
+          "status": "decision",
+          "affected_entity_role": "issuer",
+          "source_field": "structured_fields:opinionType",
+          "source_sentence": "KAP denetim görüşü alanı (opinionType): AC",
+          "action": "flash",
+          "manual_review": false,
+          "reason": "official_audit_opinion_without_llm",
+          "rules_revision": "f281f9c959e8054a",
+          "materiality": {}
+        }
+      ]
+    },
+    {
+      "case_id": "kap-1643006",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1643006",
+      "expected": {
+        "critical": false,
+        "flash": false
+      },
+      "actual_critical": false,
+      "actual_flash": false,
+      "manual_review": true,
+      "assessments": [
+        {
+          "event": "material_operations_halt",
+          "label": "Onemli ve plansiz faaliyet durmasi",
+          "priority": "P2",
+          "status": "unknown",
+          "affected_entity_role": "unknown",
+          "source_field": "body",
+          "source_sentence": "Yıllık Planlı Bakım Çalışmaları sebebiyle üretime ara verilmesi",
+          "action": "digest",
+          "manual_review": true,
+          "reason": "planned_maintenance",
+          "rules_revision": "f281f9c959e8054a",
+          "materiality": {}
+        }
+      ]
+    },
+    {
+      "case_id": "kap-1622445",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1622445",
+      "expected": {
+        "critical": false,
+        "flash": false
+      },
+      "actual_critical": false,
+      "actual_flash": false,
+      "manual_review": true,
+      "assessments": [
+        {
+          "event": "material_operations_halt",
+          "label": "Onemli ve plansiz faaliyet durmasi",
+          "priority": "P2",
+          "status": "unknown",
+          "affected_entity_role": "unknown",
+          "source_field": "body",
+          "source_sentence": "İşletmemizde makinelerin genel bakımı ve temizliğinin yapılması için üretime ara verilip planlı bakım duruş yapılacak olup , planlı bakım çalışmalarımız 03 Ağustos 2026 Pazartesi günü başlayıp 13 Ağustos 2026 Perşembe gününe kadar devam edecektir",
+          "action": "digest",
+          "manual_review": true,
+          "reason": "planned_maintenance",
+          "rules_revision": "f281f9c959e8054a",
+          "materiality": {}
+        }
+      ]
+    },
+    {
+      "case_id": "kap-1637957",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1637957",
+      "expected": {
+        "critical": false,
+        "flash": false
+      },
+      "actual_critical": false,
+      "actual_flash": false,
+      "manual_review": true,
+      "assessments": [
+        {
+          "event": "material_operations_halt",
+          "label": "Onemli ve plansiz faaliyet durmasi",
+          "priority": "P2",
+          "status": "unknown",
+          "affected_entity_role": "issuer",
+          "source_field": "body",
+          "source_sentence": "Şirketimiz Bursa fabrikasında 30.07.2026 – 16.08.2026 tarihleri arasında planlı izin kullanımı, üretim hatlarında yapılacak planlı bakım-onarım çalışmaları sebebiyle üretime geçici olarak ara verilecektir",
+          "action": "digest",
+          "manual_review": true,
+          "reason": "planned_maintenance",
+          "rules_revision": "f281f9c959e8054a",
+          "materiality": {}
+        }
+      ]
+    },
+    {
+      "case_id": "kap-1616896",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1616896",
+      "expected": {
+        "critical": false,
+        "flash": false
+      },
+      "actual_critical": false,
+      "actual_flash": false,
+      "manual_review": false,
+      "assessments": []
+    },
+    {
+      "case_id": "kap-1530788",
+      "kind": "historical",
+      "source_url": "https://www.kap.org.tr/tr/Bildirim/1530788",
+      "expected": {
+        "critical": false,
+        "flash": false
+      },
+      "actual_critical": false,
+      "actual_flash": false,
+      "manual_review": true,
+      "assessments": [
+        {
+          "event": "material_operations_halt",
+          "label": "Onemli ve plansiz faaliyet durmasi",
+          "priority": "P2",
+          "status": "unknown",
+          "affected_entity_role": "unknown",
+          "source_field": "body",
+          "source_sentence": "Yıl sonu envanter sayımı ve bakım çalışmaları nedeniyle üretime geçici olarak ara verilmesi",
+          "action": "digest",
+          "manual_review": true,
+          "reason": "planned_maintenance",
+          "rules_revision": "f281f9c959e8054a",
+          "materiality": {}
+        }
+      ]
+    }
+  ]
+}

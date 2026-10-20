@@ -1,0 +1,429 @@
+schema_version: '1.0'
+execution:
+  p0_wait_for_llm: false
+  p0_unknown_context: flash_with_manual_review
+  llm_enrichment: separate_deferred_job
+  new_business_revenue_ratio_threshold: '0.20'
+  new_business_escalated_priority: P1
+  ratio_comparison: strictly_greater_than
+  ratio_is_legal_threshold: false
+  max_revenue_age_days: 540
+  revenue_basis: verified_annual_revenue_known_at_event_time
+  incompatible_currency_or_scope: no_automatic_escalation
+  missing_financial_data: manual_review_without_invented_ratio
+  validation: labeled_historical_replay_with_fp_and_critical_fn_rates
+purpose: KAP SmartMail olay sozlugu; kural motoru icin baslangic konfigurasyonu, otomatik karar garantisi degildir.
+priority_levels:
+  P0: 'Acil: ilgili sirket icin derhal e-posta; belirsiz fail veya kapsam varsa manuel inceleme bayragi'
+  P1: 'Yuksek: portfoy/takip listesi ve finansal onemlilik ile hizlandir'
+  P2: 'Izleme: maddi etki varsa uyar, aksi halde gunluk ozet'
+  P3: 'Rutin: gunluk ozet'
+global_policy:
+  normalize:
+  - Unicode NFC
+  - Turkce kucuk harf donusumu
+  - Turkce karakterleri ASCII katlama (ı/i ş/s ğ/g ü/u ö/o ç/c) - hem bildirime hem kelime listesine uygula
+  - bosluk/noktalama normalizasyonu
+  scan_fields:
+  - notification_type
+  - subject
+  - summary
+  - structured_fields
+  - body
+  - attachments_if_parsed
+  do_not_score_from:
+  - standard_legal_disclaimer
+  - general_assembly_template_only
+  - historical_comparison_without_new_event
+  extract:
+  - issuer
+  - affected_entity
+  - affected_entity_role
+  - event_status
+  - new_or_update
+  - amount
+  - currency
+  - materiality
+  - effective_date
+  - source_sentence
+  important_negations:
+  - bulunmamaktadir
+  - soz konusu degildir
+  - iddialar gercegi yansitmamaktadir
+  - iptal edilmeyecektir
+  - iflas karari verilmesine yer olmadigina
+  event_statuses:
+  - application
+  - decision
+  - approved
+  - rejected
+  - extended
+  - cancelled
+  - denied
+  - resolved
+  - unknown
+  affected_entity_roles:
+  - issuer
+  - subsidiary
+  - affiliate
+  - customer
+  - supplier
+  - counterparty
+  - other
+  - unknown
+  default_rule: Tek basina anahtar kelime fiyat yonu ya da kesin gerceklik belirtmez; konu + ilgili ozne + eylem + statu dogrulanir.
+  deduplication: KAP bildirim ID + olay tipi + yeni statu; guncelleme/düzeltme sessizce atlanmaz
+rules:
+- id: concordat
+  priority: P0
+  direction: negative
+  label: Konkordato ve muhlet
+  match_any:
+  - konkordato basvurusu
+  - konkordato talebi
+  - konkordato ilan
+  - gecici muhlet
+  - kesin muhlet
+  - konkordato komiseri
+  check_context: Basvuru/verilen muhlet/uzatma/ret/sona erme ayrimi; ozne ihraçci mi, musteri mi? Ret otomatik iyilesme degildir.
+- id: insolvency_bankruptcy
+  priority: P0
+  direction: negative
+  label: Iflas ve borca batiklik
+  match_any:
+  - iflas karari
+  - iflasin acilmasi
+  - iflasina karar
+  - iflas basvurusu
+  - borca batiklik
+  - aciz vesikasi
+  check_context: Iflas talebi ile kesinlesen iflas karari ayrilsin; olumsuzlama kontrol edilsin.
+- id: missed_debt_payment
+  priority: P0
+  direction: negative
+  label: Borclarda temerrut ve odeme yapilamamasi
+  match_any:
+  - temerrude dus
+  - borcun odenememesi
+  - odeme yukumlulugunu yerine getireme
+  - odeme guclugu
+  - borcunu odeyememis
+  check_context: Anapara/faiz/gecikme sureleri ve odenmeme sebebi okunmali.
+- id: security_redemption_failure
+  priority: P0
+  direction: negative
+  label: Tahvil/bono/kira sertifikasi itfa ve kupon aksakligi
+  match_any:
+  - itfa gerceklestirilememis
+  - itfa odemesi yapilamam
+  - kupon odemesi yapilamam
+  - anapara odemesi yapilamam
+  - odeme yapilamama nedeni
+  check_context: Yapisal alandaki Odeme Gerceklestirildi Mi = Hayir ile capraz kontrol.
+- id: audit_adverse_disclaimer
+  priority: P0
+  direction: negative
+  label: Denetcinin olumsuz gorusu veya gorus vermekten kacinmasi
+  match_any:
+  - bagimsiz denetim raporunun olumsuz gorus icermesi
+  - gorus bildirmekten kacinma
+  - gorus bildirmekten kacinil
+  - gorus vermekten kacinma
+  - gorus vermekten kacinil
+  - olumsuz denetim gorusu
+  check_context: Yalnizca resmi denetim gorusu alaninda; SPK adaylik olumsuz gorus bildirmemesi gibi ilgisiz metni disla.
+- id: license_revocation
+  priority: P0
+  direction: negative
+  label: Hayati faaliyet lisansinin kaybi
+  match_any:
+  - faaliyet izninin iptali
+  - faaliyet izni iptal edildi
+  - lisans iptali
+  - ruhsat iptal edildi
+  - yetki belgesinin iptali
+  check_context: Lisansin sirketin ana faaliyetleri icin onemi kontrol edilmeli.
+- id: material_operations_halt
+  priority: P0
+  direction: negative
+  label: Onemli ve plansiz faaliyet durmasi
+  match_any:
+  - faaliyetlerin tamamen durdurulmasi
+  - fabrikanin kapatilmasi
+  - uretim faaliyetinin durdurulmasi
+  - faaliyetlerin imkansiz hale gelmesi
+  check_context: Planli bakim, envanter sayimi, mevsimsel gecici durus ile kalici/finansal zorunlu durus ayirt edilmeli.
+- id: delisting
+  priority: P0
+  direction: negative
+  label: Kottan cikma ve uzun sureli islem durmasi
+  match_any:
+  - kotasyondan cikarilmasi
+  - borsa kotundan cikarilmasi
+  - surekli olarak islem gormesinin durdurulmasi
+  check_context: Devre kesiciyle karistirma; islem sirasi kapatma nedeni ve suresi kontrol edilmeli.
+- id: going_concern
+  priority: P1
+  direction: negative
+  label: Isletmenin surekliligi riski
+  match_any:
+  - isletmenin surekliligine iliskin onemli belirsizlik
+  - isletmenin surekliligini surdurebilme kabiliyeti
+  - surdurulebilirligine iliskin belirsizlik
+  check_context: Denetci raporundaki ilgili paragrafi ayikla; daha onceden bilinen risk mi?
+- id: ttk376
+  priority: P1
+  direction: negative
+  label: Sermaye kaybi / TTK 376
+  match_any:
+  - ttk 376
+  - turk ticaret kanununun 376
+  - sermayenin karsiliksiz kalmasi
+  - ozkaynaklarin negatife donmesi
+  check_context: TTK 376 ifadesi standart genel kurul metninde mi yoksa gercek bir tespit mi?
+- id: collection_seizure
+  priority: P1
+  direction: negative
+  label: Icra, haciz ve teminat icrasi
+  match_any:
+  - ihtiyati haciz karari
+  - icra takibi baslatil
+  - haciz karari verildi
+  - rehinin paraya cevrilmesi
+  - rehnin paraya cevrilmesi
+  check_context: Sirket aleyhine/aleyhte degil mi, dava tutari finansallara gore maddi mi?
+- id: material_lawsuit
+  priority: P1
+  direction: mixed
+  label: Yuksek tutarli dava, tazminat ve ceza
+  match_any:
+  - aleyhimize dava acil
+  - tazminat davasinin acilmasi
+  - idari para cezasi
+  - rekabet kurulu cezasi
+  - vergi cezasi
+  check_context: Dava tutari / aktif veya ozkaynak oranini hesapla; ilk dava ve karar ayrimi.
+- id: debt_restructuring
+  priority: P1
+  direction: mixed
+  label: Borclarin yeniden yapilandirilmasi
+  match_any:
+  - finansal yeniden yapilandirma
+  - borclarin yeniden yapilandirilmasi
+  - kredi yapilandirmasi
+  - vade uzatim gorusmeleri
+  check_context: Kriz gerekcesi ile normal yeniden finansman ayrilsin.
+- id: qualified_audit
+  priority: P1
+  direction: negative
+  label: Sinirli olumlu/sartli denetim gorusu
+  match_any:
+  - sinirli olumlu gorus
+  - sartli gorus
+  check_context: Gorusun dayanak etkisi ve tutarlari incelenmeli.
+- id: contract_termination
+  priority: P1
+  direction: negative
+  label: Buyuk sozlesmenin feshi veya siparis iptali
+  match_any:
+  - sozlesmenin feshi
+  - sozlesmenin feshedilmesi
+  - ihalenin iptali
+  - siparisin iptal edilmesi
+  - sozlesmenin sona erdirilmesi
+  check_context: Sirket lehine/aleyhine fesih, iptal edilen tutar ve cironun payi.
+- id: credit_downgrade
+  priority: P1
+  direction: negative
+  label: Kredi derecelendirme notu dususu
+  match_any:
+  - kredi notunun dusurulmesi
+  - not indirimi
+  - derecelendirme notunun dusurulmesi
+  - negatif izlemeye alin
+  check_context: Notun turu, onceki not ve yeni not ayri alanlarda tutulsun.
+- id: asset_impairment
+  priority: P1
+  direction: negative
+  label: Buyuk deger dusuklugu / karsilik
+  match_any:
+  - deger dusuklugu zarari
+  - supheli alacak karsiligi
+  - karsilik ayrilmasina karar verildi
+  - varlik deger dusuklugu
+  check_context: Karsiligin hangi varliga ait oldugu ve tutari belirlenmeli; normal muhasebe dipnotlarini filtrele.
+- id: material_accident
+  priority: P1
+  direction: negative
+  label: Yangin, patlama, kaza ve hasar
+  match_any:
+  - fabrikada yangin
+  - tesisimizde yangin
+  - patlama meydana gel
+  - uretim tesisinde kaza
+  - buyuk hasar
+  check_context: Sigorta kapsamı, kapasite ve planlanan durus suresi aranir.
+- id: regulatory_investigation
+  priority: P1
+  direction: mixed
+  label: Yaptirim ve sorusturma
+  match_any:
+  - faaliyetten men
+  - sorusturma baslatildi
+  - idari yaptirim
+  - yonetime kayyim
+  - tmsfye devredil
+  check_context: Suçlama, ön inceleme, kesin hüküm ayrilsin; ilgisiz kurum ve tarihsel alintilar dislansin.
+- id: major_shareholder_sale
+  priority: P1
+  direction: mixed
+  label: Hakim ortak veya buyuk pay satisi
+  match_any:
+  - hakim ortak pay satisi
+  - ortak tarafindan pay satisi
+  - pay satis bilgi formu
+  - borsada satisa konu
+  check_context: Pay yuzdesi, kimin sattigi, halka aciklik orani ve olasi likidite etkisi.
+- id: guidance_cut
+  priority: P1
+  direction: negative
+  label: Beklentilerin asagi revize edilmesi
+  match_any:
+  - beklentilerimizin asagi yonlu revizyonu
+  - satis beklentimizin dusurulmesi
+  - favok beklentisinin asagi
+  - kar beklentisinin asagi
+  check_context: Eski/yeni guidance farkini sayisal hesapla.
+- id: cyber_outage
+  priority: P1
+  direction: negative
+  label: Siber saldiri ve kritik sistem kesintisi
+  match_any:
+  - siber saldiri
+  - fidye yazilimi
+  - bilgi sistemlerimize yetkisiz erisim
+  - veri sizintisi
+  - kritik sistem kesintisi
+  check_context: Faal kesinti, veri kaybi, operasyonel ve finansal etki teyidi.
+- id: material_new_business
+  priority: P2
+  direction: positive
+  label: Yeni is, ihale ve sozlesme
+  match_any:
+  - yeni is iliskisi
+  - ihale kazanilmasi
+  - ihale uzerimizde kaldi
+  - sozlesme imzalanmistir
+  - yeni siparis alinmistir
+  check_context: Sozlesme tutari / son 12 aylik ciro; baglayici mi niyet mektubu mu?
+- id: major_investment
+  priority: P2
+  direction: mixed
+  label: Yatirim ve kapasite artisi
+  match_any:
+  - yeni yatirim karari
+  - kapasite artisi
+  - yatirim tesvik belgesi
+  - yeni uretim tesisi
+  - yatirimin devreye alinmasi
+  check_context: Yatirim tutari, finansman kaynagi, gecikme ve kapasite katkisi.
+- id: merger_acquisition
+  priority: P2
+  direction: mixed
+  label: Birlesme, devralma, varlik satisi
+  match_any:
+  - birlesme
+  - devralma
+  - hisse alim sozlesmesi
+  - bagli ortaklik satisi
+  - pay devri
+  check_context: Alim/satim yapan tarafi, net nakit etkisini ve tutari ayir.
+- id: buyback
+  priority: P2
+  direction: mixed
+  label: Pay geri alim
+  match_any:
+  - pay geri alim programi
+  - pay geri alim islem
+  - geri alinan paylar
+  check_context: Program onayi ile fiili alim ve tutarini ayir.
+- id: cash_dividend
+  priority: P2
+  direction: mixed
+  label: Nakit temettu
+  match_any:
+  - nakit kar payi
+  - temettu odemesi
+  - kar payi dagitimi
+  check_context: Yeni karar mi, rutin odeme tarihi mi, beklentiye gore fark var mi?
+- id: paid_capital_increase
+  priority: P2
+  direction: mixed
+  label: Bedelli sermaye artirimi
+  match_any:
+  - bedelli sermaye artirimi
+  - nakden sermaye artirimi
+  - ruchan hakki kullanim
+  check_context: Ruc han orani, iskonto, bedel, fonun kullanim yeri; otomatik negatif etiketleme yapma.
+- id: bonus_capital_increase
+  priority: P2
+  direction: mixed
+  label: Bedelsiz sermaye artirimi
+  match_any:
+  - bedelsiz sermaye artirimi
+  - ic kaynaklardan sermaye artirimi
+  check_context: Sirket degerini tek basina artirmaz; rutin finansman/kurumsal islem.
+- id: vbts_measures
+  priority: P2
+  direction: neutral
+  label: VBTS likidite / islem kisitlari
+  match_any:
+  - brut takas
+  - aciga satis ve kredili islem yasagi
+  - tek fiyat yontemi
+  - emir paketi tedbiri
+  - volatilite bazli tedbir sistemi
+  check_context: VBTS risk uyarisidir, iflas demek degildir; baslangic/bitis tarihini isle.
+- id: management_change
+  priority: P2
+  direction: mixed
+  label: Ust yonetimde onemli degisiklik
+  match_any:
+  - genel mudur gorevden ayrildi
+  - ceo istifa
+  - yonetim kurulu baskani istifa
+  - cfo istifa
+  check_context: Olumlu/olumsuz yorumu baglama birak.
+- id: routine_disclosure
+  priority: P3
+  direction: neutral
+  label: Rutin idari bildirim
+  match_any:
+  - ticaret siciline tescil
+  - genel kurul toplantisina davet
+  - bagimsiz denetim kurulusunun secimi
+  - adres degisikligi
+  check_context: Rutin gorunse de beklenmedik risk olayi varsa yuksek kural onceliklidir.
+examples:
+- text: Sirketimiz konkordato talebinde bulunmustur.
+  expected_event: concordat
+  expected_status: application
+  expected_priority: P0
+- text: Sirketimizin konkordato basvurusu bulunmamaktadir.
+  expected_event: concordat
+  expected_status: denied
+  expected_action: Do not send crisis flash based only on this sentence
+- text: Kesin muhlet kaldirilmis ve iflas karari verilmistir.
+  expected_event: insolvency_bankruptcy
+  expected_priority: P0
+- text: Yillik planli bakim sebebiyle uretime 10 gun ara verilecektir.
+  expected_event: material_operations_halt
+  expected_action: downgrade after maintenance context check
+- text: Finansal tablolara iliskin gorus bildirmekten kacinilmistir.
+  expected_event: audit_adverse_disclaimer
+  expected_priority: P0
+- text: SPK tarafindan bagimsiz yonetim kurulu adaylarina olumsuz gorus bildirilmemistir.
+  expected_action: do not match audit_adverse_disclaimer
+- text: 12 milyar TL tutarinda sozlesme imzalanmistir.
+  expected_event: material_new_business
+  expected_action: compute TTM revenue ratio before escalating

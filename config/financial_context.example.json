@@ -1,0 +1,16 @@
+{
+  "companies": {},
+  "format_example_do_not_use_as_data": {
+    "company_code": "ORNEK",
+    "annual_revenue": {
+      "value": "50000000000",
+      "currency": "TRY",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "published_at": "2026-03-01T18:00:00+03:00",
+      "consolidation_scope": "consolidated",
+      "source_url": "REPLACE_WITH_VERIFIED_KAP_SOURCE",
+      "verified": false
+    }
+  }
+}

@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily KAP SQLite backup
+
+[Timer]
+OnCalendar=*-*-* 03:15:00 Europe/Istanbul
+Persistent=true
+RandomizedDelaySec=10min
+Unit=kap-bildirim-backup.service
+
+[Install]
+WantedBy=timers.target

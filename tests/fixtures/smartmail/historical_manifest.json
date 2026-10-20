@@ -1,0 +1,10 @@
+[
+  {"index":1407826,"expected":{"critical":true,"flash":true},"label_basis":"İhraççının konkordato başvurusuna üç ay geçici mühlet kararı; P0."},
+  {"index":1449773,"expected":{"critical":true,"flash":true},"label_basis":"İhraççı için bir yıllık kesin mühlet verilmesi; yeni süreç kararı, P0."},
+  {"index":1639752,"expected":{"critical":true,"flash":true},"label_basis":"İhraççının konkordato talebi ve geçici mühlet kararı; P0."},
+  {"index":1568947,"expected":{"critical":true,"flash":true},"label_basis":"İhraççı hakkında iflas kararı ve konkordato mühletinin kaldırılması; P0."},
+  {"index":1639931,"expected":{"critical":false,"flash":false},"label_basis":"Planlı bakım nedeniyle geçici üretim duruşu; kriz P0 değildir."},
+  {"index":1635877,"expected":{"critical":false,"flash":false},"label_basis":"Yıllık izin ve planlı bakım nedeniyle üretim arası; kriz P0 değildir."},
+  {"index":1438970,"expected":{"critical":false,"flash":false},"label_basis":"Genel kurul gündeminde önceden bilinen konkordato süreci hakkında bilgi; yeni kriz kararı yok."},
+  {"index":1442035,"expected":{"critical":false,"flash":false},"label_basis":"Bağımsız yönetim kurulu adaylığına ilişkin SPK olumsuz görüş bildirmemesi; denetçi olumsuz görüşü değildir."}
+]

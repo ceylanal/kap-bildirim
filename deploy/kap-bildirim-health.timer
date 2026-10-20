@@ -1,0 +1,10 @@
+[Unit]
+Description=Check KAP pilot every five minutes
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=5min
+Unit=kap-bildirim-health.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,18 @@
+# Local credentials and runtime state
+.env
+.env.*
+!.env.example
+data/
+backups/
+*.sqlite3*
+*.log
+*.lock
+health.json
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+# Deployment evidence may contain private infrastructure details
+artifacts/
+reports/*live*
+reports/*verification*
